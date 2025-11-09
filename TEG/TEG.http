@@ -1,0 +1,6 @@
+@TEG_HostAddress = http://localhost:5022
+
+GET {{TEG_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
