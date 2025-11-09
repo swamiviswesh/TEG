@@ -1,73 +1,34 @@
-# React + TypeScript + Vite
+# Frontend — TEG Events Calendar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Simple React + Vite frontend that renders an events calendar using the backend's enriched events API.
 
-Currently, two official plugins are available:
+## Requirements
+- Node.js 18+ (or compatible)
+- npm (or yarn/pnpm)
+- Browser with HTTPS support for local API calls to https://localhost:7128
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Quick start
+1. Install dependencies
+   - npm: `npm install`
 
-## React Compiler
+2. Run dev server (Vite, default port 9000)
+   - npm: `npm run dev`
+   - Open: http://localhost:9000
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+3. Build for production
+   - `npm run build`
+   - Preview production build:
+     - `npm run preview`
 
-## Expanding the ESLint configuration
+4. Lint
+   - `npm run lint`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Configuration
+- API URL used by the app:
+  - Default located in `frontend/src/App.tsx`:
+    - `const API_URL = 'https://localhost:7128/api/events/enriched';`
+  - If your backend is served on a different port or host, update that constant or refactor to use an environment variable (e.g., `import.meta.env.VITE_API_URL`) before building.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Notes
+- Dev server runs on port 9000. Ensure the backend CORS policy allows this origin (see backend README).
+- The UI displays small circle indicators in the calendar grid; click a circle to open the event details modal.
